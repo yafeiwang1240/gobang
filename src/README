@@ -1,0 +1,44 @@
+[protocol]
+#HEAD
+BYTE1   #68H
+BYTE2   #LEN
+BYTE2   #obligate
+BYTE1   #68H
+
+#DATA
+BYTE1   #direction 1 export, 0 reply
+BYTE1   AFN
+BYTE1   Fn
+...     #data
+
+#END
+BYTE1   #CS
+BYTE1   #16H
+
+[AFN]
+00  #confirm
+    [FN]
+    01  #confirm
+    02  #deny
+
+01  #request
+    [FN]
+    01  #retract a false move in a chess game or
+    02  #a draw in chess or other board games
+
+05  #select
+    [FN]
+    01  #on the offensive (in chess)
+    02  #defensive position;
+
+0A  #play
+    [FN]
+    01  #play
+    [data]
+    BYTE1   #INDEX_X
+    BYTE1   #INDEX_Y
+
+FF  #heartbeat
+    [FN]
+    FF  #heartbeat
+
